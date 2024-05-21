@@ -1,6 +1,8 @@
 import io from 'socket.io-client'
 
 export const SOCKET_EMIT_CODE_UPDATED = 'codeUpdated'
+export const SOCKET_EVENT_IS_STUDENT = 'student'
+export const SOCKET_EVENT_JOIN = 'join'
 
 const baseUrl = (process.env.NODE_ENV === 'production') ? '' : '//localhost:3030'
 export const socketService = createSocketService()
