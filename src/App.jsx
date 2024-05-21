@@ -1,9 +1,10 @@
 import './assets/style/main.scss'
+import { Lobby } from './pages/Lobby'
 
 function App() {
 
   return (
-    <h1>Code Editor</h1>
+    <Lobby/>
   )
 }
 
