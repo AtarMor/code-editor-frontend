@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { NavLink } from "react-router-dom"
+
 import { codeBlockService } from "../services/code-block.service"
 
 export function Lobby() {
@@ -20,11 +22,11 @@ export function Lobby() {
     return <div className="code-blocks-container">
         <h2>Choose code block</h2>
         <ul className="code-blocks-list clean-list">
-            {codeBlocks.map(block => (
-                <li key={block.id} onClick={() => handleCodeBlockClick(block.id)}>
-                    {block.title}
-                </li>
+            {codeBlocks.map(code => (
+                <NavLink to={`/code/${code._id}`}>
+                    <li key={code.id}>{code.title}</li>
+                </NavLink>
             ))}
         </ul>
-    </div> 
+    </div>
 }

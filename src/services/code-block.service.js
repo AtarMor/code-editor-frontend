@@ -5,7 +5,8 @@ const CODE_KEY = 'codeBlockDB'
 _createCodeBlocks()
 
 export const codeBlockService = {
-    query
+    query,
+    getById,
 }
 
 async function query() {
@@ -15,6 +16,10 @@ async function query() {
     } catch (err) {
         console.log('Had issues getting code blocks', err)
     }
+}
+
+function getById(codeBlockId) {
+    return storageService.get(CODE_KEY, codeBlockId)
 }
 
 function _createCodeBlocks() {
