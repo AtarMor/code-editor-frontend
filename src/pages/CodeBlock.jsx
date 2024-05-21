@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 
 import { codeBlockService } from "../services/code-block.service"
 import { SOCKET_EMIT_CODE_UPDATED, SOCKET_EVENT_IS_STUDENT, SOCKET_EVENT_JOIN, socketService } from "../services/socket.service"
+import { Editor } from "@monaco-editor/react"
 
 export function CodeBlock() {
     const [codeBlock, setCodeBlock] = useState(null)
@@ -34,17 +35,16 @@ export function CodeBlock() {
         }
     }
 
-    function handleCodeChange({ target }) {
-        const newCode = target.value
+    function handleCodeChange(value) {
+        const newCode = value
         onUpdateCode(newCode)
     }
 
     async function onUpdateCode(newCode) {
         const updatedCode = { ...codeBlock, code: newCode }
         try {
-            const savedCode = await codeBlockService.update(updatedCode)
-            setCodeBlock(savedCode)
-            socketService.emit(SOCKET_EMIT_CODE_UPDATED)
+            await codeBlockService.update(updatedCode)
+            socketService.emit(SOCKET_EMIT_CODE_UPDATED, codeId)
         } catch (err) {
             console.log('Had issues updating code', err)
         }
@@ -53,11 +53,23 @@ export function CodeBlock() {
     if (!codeBlock) return <div>Loading...</div>
     return (
         <div className="code-block">
+            <h2>Welcome {isMentor ? 'mentor' : 'student'}</h2>
             <h2>{codeBlock.title}</h2>
-            <pre>
-                <textarea readOnly={isMentor} value={codeBlock.code} onChange={handleCodeChange}>
-                </textarea>
-            </pre>
+            <Editor
+                height="90vh"
+                defaultLanguage="javascript"
+                value={codeBlock.code}
+                options={{
+                    readOnly: isMentor,
+                    fontSize: 16,
+                    minimap: {
+                        enabled: false
+                    },
+                    contextmenu: false
+                }}
+                onChange={handleCodeChange}
+                theme="vs-dark"
+            />
         </div>
     )
 }
