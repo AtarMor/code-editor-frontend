@@ -22,18 +22,28 @@ export function CodeBlock() {
         }
     }
 
-    function handleCodeChange({target}) {
+    function handleCodeChange({ target }) {
         const newCode = target.value
-        setCodeBlock(newCode)
+        onUpdateCode(newCode)
+    }
+
+    async function onUpdateCode(newCode) {
+        const updatedCode = {...codeBlock, code: newCode}
+        try {
+            const savedCode = await codeBlockService.update(updatedCode)
+            setCodeBlock(savedCode)
+        } catch (err) {
+            console.log('Had issues updating code', err)
+        }
     }
 
     if (!codeBlock) return <div>Loading...</div>
     return (
         <div className="code-block">
-            <pre>
                 <h2>{codeBlock.title}</h2>
-                    <textarea value={codeBlock.code} onChange={handleCodeChange}>
-                    </textarea>
+            <pre>
+                <textarea value={codeBlock.code} onChange={handleCodeChange}>
+                </textarea>
             </pre>
         </div>
     )

@@ -2,7 +2,8 @@ import { httpService } from "./http.service"
 
 export const codeBlockService = {
     query,
-    getById
+    getById,
+    update
 }
 
 function query() {
@@ -11,4 +12,8 @@ function query() {
 
 function getById(codeId) {
     return httpService.get(`code/${codeId}`)
+}
+
+function update(code) {
+    return httpService.put(`code/${code._id}`, code)
 }
