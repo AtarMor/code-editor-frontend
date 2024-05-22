@@ -2,28 +2,33 @@ import { useEffect, useRef, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
 import { codeBlockService } from "../services/code-block.service"
-import { SOCKET_EMIT_CODE_UPDATED, SOCKET_EVENT_IS_STUDENT, SOCKET_EVENT_JOIN, socketService } from "../services/socket.service"
+import { SOCKET_EMIT_CODE_UPDATED, SOCKET_EVENT_IS_MENTOR, SOCKET_EVENT_JOIN, socketService } from "../services/socket.service"
 import { Editor } from "@monaco-editor/react"
 import { CodeBlockHeader } from "../components/CodeBlockHeader"
 
 export function CodeBlock() {
     const [codeBlock, setCodeBlock] = useState(null)
-    const [isMentor, setIsMentor] = useState(true)
+    const [isMentor, setIsMentor] = useState(false)
     const { codeId } = useParams()
     const navigate = useNavigate()
     const editorRef = useRef(null)
 
     useEffect(() => {
         loadCodeBlock()
+        if (sessionStorage.getItem(`isMentor-${codeId}`)) setIsMentor(true)
     }, [])
+
+    useEffect(() => {
+        if (isMentor) sessionStorage.setItem(`isMentor-${codeId}`, true)
+    }, [isMentor])
 
     useEffect(() => {
         socketService.emit(SOCKET_EVENT_JOIN, codeId)
         socketService.on(SOCKET_EMIT_CODE_UPDATED, loadCodeBlock)
-        socketService.on(SOCKET_EVENT_IS_STUDENT, () => setIsMentor(false))
+        socketService.on(SOCKET_EVENT_IS_MENTOR, () => setIsMentor(true))
         return () => {
             socketService.off(SOCKET_EMIT_CODE_UPDATED, loadCodeBlock)
-            socketService.off(SOCKET_EVENT_IS_STUDENT, () => setIsMentor(true))
+            socketService.off(SOCKET_EVENT_IS_MENTOR, () => setIsMentor(false))
         }
     }, [])
 
@@ -38,6 +43,7 @@ export function CodeBlock() {
     }
 
     function handleCodeChange(value) {
+        if (isMentor) return
         const newCode = value
         onUpdateCode(newCode)
     }
