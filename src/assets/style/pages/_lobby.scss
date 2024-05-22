@@ -6,7 +6,7 @@
         gap: 10px;
     }
 
-    .code-blocks-list {
+    .code-blocks-list-container {
         background-color: $primary-bg-2;
         padding: 1.5em;
         border: 0.5px solid $gray-60;
@@ -17,15 +17,10 @@
             padding-block-end: 0.8em;
         }
 
-        ol {
-            margin: 0;
-            padding: 0 0 0 1.5em;
+        .lobby-loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-    }
-
-    .lobby-loader {
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 }
