@@ -1,10 +1,17 @@
 .code-block-header {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: auto auto;
     justify-items: center;
     align-items: center;
+    gap: 10px;
     background-color: $primary-bg-1;
-    padding-block: 0.3em;
+    padding-block: 0.8em;
+
+    @include for-small-layout {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto;
+    }
 
     h2 {
         font-size: 1rem;
@@ -13,17 +20,25 @@
     .logo-container {
         gap: 10px;
         justify-self: start;
+
         img {
             width: 3rem;
         }
     }
 
     .btn-container {
+        grid-area: 2 / span 2;
         gap: 10px;
+
+        @include for-small-layout {
+            grid-area: auto;
+        }
     }
 
     .welcome-user {
         justify-self: end;
+        justify-content: end;
+        text-align: end;
         gap: 10px;
     }
 }

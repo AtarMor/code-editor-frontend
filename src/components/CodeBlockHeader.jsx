@@ -6,11 +6,10 @@ export function CodeBlockHeader({ isMentor, codeBlock, onSubmitCode, onReset }) 
             <NavLink to={'/'}>
                 <img src="../assets/img/logo.png" alt="logo" />
             </NavLink>
-            <h2>{codeBlock.title}</h2>
+            <h2 className="code-block-title">{codeBlock.title}</h2>
         </section>
         <section className="btn-container flex">
             <button className="dark-btn" onClick={onReset} disabled={isMentor}>Reset</button>
-            <button className="dark-btn">Run</button>
             <button className="dark-btn" onClick={onSubmitCode}>Submit</button>
         </section>
         <section className="welcome-user flex">
