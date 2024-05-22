@@ -3,6 +3,9 @@
 }
 
 html {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: $primary-bg-1;
+  color: $primary-1;
 }
 
 body,
@@ -16,6 +19,7 @@ p,
 a {
   margin: 0;
   padding: 0;
+  font-weight: lighter;
 }
 
 button {

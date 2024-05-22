@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
 import { codeBlockService } from "../services/code-block.service"
 import { SOCKET_EMIT_CODE_UPDATED, SOCKET_EVENT_IS_STUDENT, SOCKET_EVENT_JOIN, socketService } from "../services/socket.service"
 import { Editor } from "@monaco-editor/react"
+import { CodeBlockHeader } from "../components/CodeBlockHeader"
 
 export function CodeBlock() {
     const [codeBlock, setCodeBlock] = useState(null)
     const [isMentor, setIsMentor] = useState(true)
     const { codeId } = useParams()
     const navigate = useNavigate()
+    const editorRef = useRef(null)
 
     useEffect(() => {
         loadCodeBlock()
@@ -50,26 +52,33 @@ export function CodeBlock() {
         }
     }
 
+    function onMount(editor) {
+        editorRef.current = editor
+        editor.focus()
+    }
+
     if (!codeBlock) return <div>Loading...</div>
     return (
         <div className="code-block">
-            <h2>Welcome {isMentor ? 'mentor' : 'student'}</h2>
-            <h2>{codeBlock.title}</h2>
-            <Editor
-                height="90vh"
-                defaultLanguage="javascript"
-                value={codeBlock.code}
-                options={{
-                    readOnly: isMentor,
-                    fontSize: 16,
-                    minimap: {
-                        enabled: false
-                    },
-                    contextmenu: false
-                }}
-                onChange={handleCodeChange}
-                theme="vs-dark"
-            />
+            <CodeBlockHeader isMentor={isMentor} codeBlock={codeBlock} />
+            <div className="code-editor">
+                <Editor
+                    height="90vh"
+                    defaultLanguage="javascript"
+                    value={codeBlock.code}
+                    options={{
+                        readOnly: isMentor,
+                        fontSize: 16,
+                        minimap: {
+                            enabled: false
+                        },
+                        contextmenu: false
+                    }}
+                    onMount={onMount}
+                    onChange={handleCodeChange}
+                    theme="vs-dark"
+                />
+            </div>
         </div>
     )
 }
