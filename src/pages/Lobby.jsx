@@ -19,14 +19,20 @@ export function Lobby() {
         }
     }
 
-    return <div className="code-blocks-container">
-        <h2>Choose code block</h2>
-        <ul className="code-blocks-list clean-list">
-            {codeBlocks.map(code => (
-                <NavLink to={`/code/${code._id}`}>
-                    <li key={code.id}>{code.title}</li>
-                </NavLink>
-            ))}
-        </ul>
+    return <div className="lobby-page flex column align-center">
+        <header className="flex align-center">
+            <img src="../img/logo.png" alt="logo" />
+            <h1>Welcome to Codify</h1>
+        </header>
+        <div className="code-blocks-list">
+            <h2 className="title">Choose a code block:</h2>
+            <ol>
+                {codeBlocks.map(code => (
+                    <NavLink to={`/code/${code._id}`}>
+                        <li key={code.id}>{code.title}</li>
+                    </NavLink>
+                ))}
+            </ol>
+        </div>
     </div>
 }

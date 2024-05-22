@@ -1,9 +1,10 @@
 .code-block {
    padding-inline: 15px;
+
    .code-editor {
       background-color: $primary-bg-2;
       border: 0.5px solid $gray-60;
-      border-radius: 8px;
+      border-radius: $big-br;
       padding: 1em 0.5em;
    }
 }
