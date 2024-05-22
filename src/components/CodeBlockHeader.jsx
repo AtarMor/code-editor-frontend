@@ -9,8 +9,8 @@ export function CodeBlockHeader({ isMentor, codeBlock }) {
             <h2>{codeBlock.title}</h2>
         </section>
         <section className="btn-container flex">
-            <button>Reset</button>
-            <button>Run</button>
+            <button className="dark-btn">Reset</button>
+            <button className="dark-btn">Run</button>
         </section>
         <section className="welcome-user flex">
             <h2>Welcome {isMentor ? 'mentor!' : 'student!'}</h2>
