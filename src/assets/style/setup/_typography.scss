@@ -1,4 +1,20 @@
-/* FONT AWESOME */
+// ROBOTO //
+@font-face {
+    font-family: RobotoRegular;
+    src: url(/assets/fonts/Roboto/Roboto-Regular.ttf);
+}
+
+@font-face {
+    font-family: RobotoMedium;
+    src: url(/assets/fonts/Roboto/Roboto-Medium.ttf);
+}
+
+@font-face {
+    font-family: RobotoBold;
+    src: url(/assets/fonts/Roboto/Roboto-Bold.ttf);
+}
+
+// FONT AWESOME //
 @font-face {
     font-family: fa;
     src: url("/assets/fonts/fa/fa-regular-400.ttf");
