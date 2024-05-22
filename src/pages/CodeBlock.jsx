@@ -16,6 +16,7 @@ export function CodeBlock() {
     const editorRef = useRef(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [userMsg, setUserMsg] = useState('')
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         loadCodeBlock()
@@ -38,11 +39,14 @@ export function CodeBlock() {
 
     async function loadCodeBlock() {
         try {
+            setIsLoading(true)
             const codeBlock = await codeBlockService.getById(codeId)
             setCodeBlock(codeBlock)
         } catch (err) {
             console.log('Had issues loading code block:', err)
             navigate('/')
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -92,7 +96,7 @@ export function CodeBlock() {
         editor.focus()
     }
 
-    if (!codeBlock) return <div>Loading...</div>
+    if (isLoading) return <div className="code-block-loader"><div className="loader"></div></div>
     return (
         <div className="code-block">
             <CodeBlockHeader
