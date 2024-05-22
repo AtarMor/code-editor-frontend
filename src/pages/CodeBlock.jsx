@@ -53,23 +53,38 @@ export function CodeBlock() {
     }
 
     async function onUpdateCode(newCode) {
+        const prevCode = { ...codeBlock }
         const updatedCode = { ...codeBlock, code: newCode }
+        setCodeBlock(updatedCode)
+
         try {
             await codeBlockService.update(updatedCode)
             socketService.emit(SOCKET_EMIT_CODE_UPDATED, codeId)
         } catch (err) {
             console.log('Had issues updating code', err)
+            setCodeBlock(prevCode)
         }
     }
 
     function onSubmitCode() {
         if (editorRef.current.getValue().trim() === codeBlock.solution.trim()) {
             setIsModalOpen(true)
-            setUserMsg({txt: 'Great job!', type: 'success'})
+            setUserMsg({ txt: 'Great job!', type: 'success' })
         } else {
-            setUserMsg({txt: 'Try again', type: 'failure'})
+            setUserMsg({ txt: 'Try again', type: 'failure' })
         }
         setIsModalOpen(true)
+    }
+
+    async function onReset() {
+        const resetCode = { ...codeBlock, code: codeBlock.startingCode }
+        try {
+            await codeBlockService.update(resetCode)
+            setCodeBlock(resetCode)
+            socketService.emit(SOCKET_EMIT_CODE_UPDATED, codeId)
+        } catch (err) {
+            console.log('Had issues resetting code', err)
+        }
     }
 
     function onMount(editor) {
@@ -80,7 +95,12 @@ export function CodeBlock() {
     if (!codeBlock) return <div>Loading...</div>
     return (
         <div className="code-block">
-            <CodeBlockHeader isMentor={isMentor} codeBlock={codeBlock} onSubmitCode={onSubmitCode} />
+            <CodeBlockHeader
+                isMentor={isMentor}
+                codeBlock={codeBlock}
+                onSubmitCode={onSubmitCode}
+                onReset={onReset}
+            />
             <div className="code-editor">
                 <Editor
                     height="90vh"

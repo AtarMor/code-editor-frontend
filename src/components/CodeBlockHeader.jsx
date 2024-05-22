@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-export function CodeBlockHeader({ isMentor, codeBlock, onSubmitCode }) {
+export function CodeBlockHeader({ isMentor, codeBlock, onSubmitCode, onReset }) {
     return <header className="code-block-header">
         <section className="logo-container flex align-center">
             <NavLink to={'/'}>
@@ -9,9 +9,9 @@ export function CodeBlockHeader({ isMentor, codeBlock, onSubmitCode }) {
             <h2>{codeBlock.title}</h2>
         </section>
         <section className="btn-container flex">
-            <button className="dark-btn">Reset</button>
+            <button className="dark-btn" onClick={onReset} disabled={isMentor}>Reset</button>
             <button className="dark-btn">Run</button>
-            <button onClick={onSubmitCode} className="dark-btn">Submit</button>
+            <button className="dark-btn" onClick={onSubmitCode}>Submit</button>
         </section>
         <section className="welcome-user flex">
             <h2>Welcome {isMentor ? 'mentor!' : 'student!'}</h2>
