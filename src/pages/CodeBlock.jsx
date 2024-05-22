@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { Editor } from "@monaco-editor/react"
+
+import { Modal } from "../components/Modal"
+import { CodeBlockHeader } from "../components/CodeBlockHeader"
 
 import { codeBlockService } from "../services/code-block.service"
 import { SOCKET_EMIT_CODE_UPDATED, SOCKET_EVENT_IS_MENTOR, SOCKET_EVENT_JOIN, socketService } from "../services/socket.service"
-import { Editor } from "@monaco-editor/react"
-import { CodeBlockHeader } from "../components/CodeBlockHeader"
 
 export function CodeBlock() {
     const [codeBlock, setCodeBlock] = useState(null)
@@ -12,6 +14,8 @@ export function CodeBlock() {
     const { codeId } = useParams()
     const navigate = useNavigate()
     const editorRef = useRef(null)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [userMsg, setUserMsg] = useState('')
 
     useEffect(() => {
         loadCodeBlock()
@@ -58,6 +62,16 @@ export function CodeBlock() {
         }
     }
 
+    function onSubmitCode() {
+        if (editorRef.current.getValue().trim() === codeBlock.solution.trim()) {
+            setIsModalOpen(true)
+            setUserMsg({txt: 'Great job!', type: 'success'})
+        } else {
+            setUserMsg({txt: 'Try again', type: 'failure'})
+        }
+        setIsModalOpen(true)
+    }
+
     function onMount(editor) {
         editorRef.current = editor
         editor.focus()
@@ -66,7 +80,7 @@ export function CodeBlock() {
     if (!codeBlock) return <div>Loading...</div>
     return (
         <div className="code-block">
-            <CodeBlockHeader isMentor={isMentor} codeBlock={codeBlock} />
+            <CodeBlockHeader isMentor={isMentor} codeBlock={codeBlock} onSubmitCode={onSubmitCode} />
             <div className="code-editor">
                 <Editor
                     height="90vh"
@@ -85,6 +99,8 @@ export function CodeBlock() {
                     theme="vs-dark"
                 />
             </div>
+            {isModalOpen && userMsg &&
+                <Modal userMsg={userMsg} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
         </div>
     )
 }

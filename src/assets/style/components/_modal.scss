@@ -1,0 +1,43 @@
+.modal {
+  position: fixed;
+  align-items: center;
+  gap: 1rem;
+  min-width: 200px;
+
+  background-color: $gray-40;
+  border: none;
+  border-radius: $small-br;
+
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  .smile-icon {
+    width: 80px;
+  }
+
+  button {
+    background-color: transparent;
+    padding: 0.4em 0.6em;
+
+    &:hover {
+      background-color: $gray-50;
+    }
+  }
+
+  .close-btn {
+    align-self: start;
+    font-size: .7rem;
+  }
+
+  .back-btn {
+    margin-block-start: 1em;
+  }
+}
+
+::backdrop {
+  background-image: linear-gradient(45deg,
+      magenta,
+      rebeccapurple,
+      dodgerblue,
+      green);
+  opacity: 0.3;
+}

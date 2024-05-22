@@ -26,13 +26,13 @@ button {
   cursor: pointer;
   border: none;
   font-family: inherit;
+  border-radius: $small-br;
 }
 
 .dark-btn {
   background-color: $gray-80;
   color: $primary-1;
   padding: .5em .8em;
-  border-radius: $small-br;
 
   &:hover {
     background-color: $gray-70;
