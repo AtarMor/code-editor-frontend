@@ -111,11 +111,12 @@ export function CodeBlock() {
         try {
             setIsRunnerLoading(true)
             const { run: res } = await codeBlockService.runCode(codeBlock.code)
-            setOutput(res.output.split('\n'))
+            res.output ? setOutput(res.output.split('\n')) :
+                setOutput(['It looks like nothing was printed. Make sure your code includes a print statement.'])
             res.stderr ? setIsError(true) : setIsError(false)
         } catch (err) {
             console.log('Unable to run code:', err)
-            setOutput('Unable to run code. Please try again later.')
+            setOutput('Sorry, unable to run code. Please try again later.')
         } finally {
             setIsRunnerLoading(false)
         }
