@@ -1,6 +1,6 @@
 .code-block-header {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: repeat(2, minmax(auto, 1fr));
     grid-template-rows: auto auto;
     justify-items: center;
     align-items: center;
@@ -9,7 +9,7 @@
     padding-block: 0.8em;
 
     @include for-small-layout {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: repeat(3, minmax(auto, 1fr));
         grid-template-rows: auto;
     }
 
