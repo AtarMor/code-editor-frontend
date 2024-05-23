@@ -8,6 +8,12 @@ html {
   color: $primary-1;
 }
 
+body {
+  main {
+    height: 100dvh;
+  }
+}
+
 body,
 h1,
 h2,

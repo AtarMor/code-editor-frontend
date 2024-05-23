@@ -6,7 +6,6 @@
     align-items: center;
     gap: 10px;
     background-color: $primary-bg-1;
-    padding-block: 0.8em;
 
     @include for-small-layout {
         grid-template-columns: repeat(3, minmax(auto, 1fr));

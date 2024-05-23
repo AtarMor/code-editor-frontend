@@ -1,9 +1,11 @@
+import axios from "axios"
 import { httpService } from "./http.service"
 
 export const codeBlockService = {
     query,
     getById,
-    update
+    update,
+    runCode
 }
 
 function query() {
@@ -17,3 +19,16 @@ function getById(codeId) {
 function update(code) {
     return httpService.put(`code/${code._id}`, code)
 }
+
+function runCode(userCode) {
+    return httpService.post('code/execute', {
+        language: 'javascript',
+        version: '18.15.0',
+        files: [
+            {
+                content: userCode
+            }
+        ]
+    })
+}
+
