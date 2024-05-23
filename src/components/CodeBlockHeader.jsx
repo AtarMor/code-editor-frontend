@@ -14,7 +14,7 @@ export function CodeBlockHeader({ isMentor, codeBlock, onSubmitCode, onReset, on
             <button className="dark-btn fa check" onClick={onSubmitCode}>Submit</button>
         </section>
         <section className="welcome-user flex">
-            <h2>Welcome {isMentor ? 'mentor!' : 'student!'}</h2>
+            <h2>Welcome {isMentor ? 'Mentor!' : 'Student!'}</h2>
         </section>
     </header>
 }

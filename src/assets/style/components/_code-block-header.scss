@@ -1,10 +1,11 @@
 .code-block-header {
     display: grid;
-    grid-template-columns: repeat(2, minmax(auto, 1fr));
+    grid-template-columns: minmax(auto, 1fr) minmax(auto, 70px);
     grid-template-rows: auto auto;
     justify-items: center;
     align-items: center;
     gap: 10px;
+
     background-color: $primary-bg-1;
 
     @include for-small-layout {
@@ -12,8 +13,14 @@
         grid-template-rows: auto;
     }
 
+    @include for-large-layout {
+        grid-column: 1/span 2;
+    }
+
     h2 {
         font-size: 1rem;
+        max-height: 3.5em;
+        overflow: hidden;
     }
 
     .logo-container {
