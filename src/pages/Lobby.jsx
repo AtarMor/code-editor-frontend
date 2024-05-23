@@ -26,7 +26,7 @@ export function Lobby() {
     return <div className="lobby-page flex column">
         <header className="flex align-center">
             <img src="../assets/img/logo.png" alt="logo" />
-            <h1>Welcome to Codify</h1>
+            <h1>Welcome to Coditor</h1>
         </header>
         <div className="code-blocks-list-container">
             <h2 className="title">Choose a code block:</h2>
