@@ -45,7 +45,6 @@ export function CodeBlock() {
 
     async function loadCodeBlock() {
         try {
-            setIsLoading(true)
             const codeBlock = await codeBlockService.getById(codeId)
             setCodeBlock(codeBlock)
         } catch (err) {
