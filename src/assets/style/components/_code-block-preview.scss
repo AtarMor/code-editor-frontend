@@ -1,0 +1,30 @@
+.code-block-preview {
+    text-align: center;
+    line-height: 1.7em;
+
+    padding: 1em;
+    border: .5px solid #777;
+    border-radius: $big-br;
+    margin-block: 10px;
+
+    background-color: #1e1e1e;
+    box-shadow: rgba(26, 26, 141, 0.283) 0px 0px 16px;
+    
+    break-inside: avoid;
+
+    &:first-child {
+        margin-block-start: 0;
+    }
+
+    .easy {
+        color: $easy-clr;
+    }
+
+    .medium {
+        color: $medium-clr;
+    }
+
+    .hard {
+        color: $hard-clr;
+    }
+}

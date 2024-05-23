@@ -11,3 +11,9 @@
     @content;
   }
 }
+
+@mixin for-large-layout {
+  @media (min-width: $break-large) {
+    @content;
+  }
+}

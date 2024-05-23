@@ -1,4 +1,15 @@
 .code-block-list {
-    margin: 0;
-    padding: 0 0 0 1.5em;
+    columns: auto 1;
+
+    @include for-small-layout {
+        column-count: 2;
+    }
+
+    @include for-medium-layout {
+        column-count: 3;
+    }
+
+    @include for-large-layout {
+        column-count: 4;
+    }
 }

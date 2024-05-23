@@ -4,6 +4,7 @@
 
     header {
         gap: 10px;
+        align-self: center;
 
         h1 {
             font-size: 1.5rem;
@@ -15,21 +16,9 @@
     }
 
     .code-blocks-list-container {
-        width: 100%;
-        display: grid;
-        justify-content: center;
-        background-color: $primary-bg-2;
-        padding: 1.5em;
-        border: 0.5px solid $gray-60;
-        border-radius: $big-br;
-        line-height: 1.7em;
-
-        @include for-small-layout {
-            width: auto;
-        }
-
         .title {
-            padding-block-end: 0.8em;
+            padding-block-end: 1.3em;
+            text-align: center;
         }
 
         .lobby-loader {
