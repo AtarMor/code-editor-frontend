@@ -21,22 +21,38 @@
 }
 
 @font-face {
-    font-family: solid;
+    font-family: fa-solid;
     src: url("/assets/fonts/fa/fa-solid-900.ttf");
 }
 
-.fa::before {
+.fa::after {
     font-family: fa;
 }
 
-.solid::before {
-    font-family: solid;
+.fa-solid::before {
+    font-family: fa-solid;
 }
 
-.solid.x::before {
+.fa-solid::after {
+    font-family: fa-solid;
+}
+
+.fa-solid.x::before {
     content: "\58";
 }
 
-.solid.house::before {
+.fa-solid.house::before {
     content: "\f015";
+}
+
+.fa-solid.reset::before {
+    content: "\f0e2";
+}
+
+.fa-solid.caret-right::after {
+    content: "\f0da";
+}
+
+.fa.check::after {
+    content: "\f14a";
 }

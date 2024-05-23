@@ -29,6 +29,9 @@ a {
 }
 
 button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
   cursor: pointer;
   border: none;
   font-family: RobotoMedium, Arial, Helvetica, sans-serif;

@@ -9,9 +9,9 @@ export function CodeBlockHeader({ isMentor, codeBlock, onSubmitCode, onReset, on
             <h2 className="code-block-title">{codeBlock.title}</h2>
         </section>
         <section className="btn-container flex">
-            <button className="dark-btn" onClick={onReset}>Reset</button>
-            <button className="dark-btn" onClick={onRunCode}>Run</button>
-            <button className="dark-btn" onClick={onSubmitCode}>Submit</button>
+            <button className="dark-btn fa-solid reset" onClick={onReset}>Reset</button>
+            <button className="dark-btn fa-solid caret-right" onClick={onRunCode}>Run</button>
+            <button className="dark-btn fa check" onClick={onSubmitCode}>Submit</button>
         </section>
         <section className="welcome-user flex">
             <h2>Welcome {isMentor ? 'mentor!' : 'student!'}</h2>

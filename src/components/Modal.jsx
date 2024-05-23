@@ -21,11 +21,11 @@ export function Modal({ userMsg, isModalOpen, setIsModalOpen }) {
 
     return (
         <dialog className="modal flex column" ref={modalRef} onClose={onCloseModal}>
-            <button className="close-btn solid x" onClick={onCloseModal}></button>
+            <button className="close-btn fa-solid x" onClick={onCloseModal}></button>
             <p>{userMsg.txt}</p>
             <img className="smile-icon" src={`../assets/img/${smileIcon}.png`} alt={`${smileIcon}-icon`}></img>
             <Link to={'/'}>
-                <button className="back-btn solid house"></button>
+                <button className="back-btn fa-solid house"></button>
             </Link>
         </dialog>
     )
