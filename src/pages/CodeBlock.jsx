@@ -76,18 +76,8 @@ export function CodeBlock() {
         }
     }
 
-    function onSubmitCode() {
-        if (editorRef.current.getValue().trim() === codeBlock.solution.trim()) {
-            setIsModalOpen(true)
-            setUserMsg({ txt: 'Great job!', type: 'success' })
-        } else {
-            setUserMsg({ txt: 'Try again', type: 'failure' })
-        }
-        setIsModalOpen(true)
-    }
-
     async function onReset() {
-        const resetCode = { ...codeBlock, code: codeBlock.startingCode }
+        const resetCode = { ...codeBlock, code: codeBlock.initialCode }
         try {
             await codeBlockService.update(resetCode)
             setCodeBlock(resetCode)
@@ -95,6 +85,25 @@ export function CodeBlock() {
         } catch (err) {
             console.log('Had issues resetting code', err)
         }
+    }
+
+    async function onSubmitCode() {
+        try {
+            const { run: expected } = await codeBlockService.runCode(codeBlock.solution + codeBlock.tests)
+            const { run: actual } = await codeBlockService.runCode(codeBlock.code + codeBlock.tests)
+            checkSolution(actual.output, expected.output)
+        } catch (err) {
+            console.log('Had issues checking solution:', err)
+        }
+    }
+
+    function checkSolution(actual, expected) {
+        if (actual === expected) {
+            setUserMsg({ txt: 'Great job!', type: 'success' })
+        } else {
+            setUserMsg({ txt: 'Try again', type: 'failure' })
+        }
+        setIsModalOpen(true)
     }
 
     async function onRunCode() {
@@ -129,8 +138,6 @@ export function CodeBlock() {
             />
             <div className="code-editor">
                 <Editor
-                    // height="100%"
-                    // width="100%"
                     defaultLanguage="javascript"
                     value={codeBlock.code}
                     options={{
