@@ -4,7 +4,7 @@
 This project is an online coding web application designed to facilitate remote mentoring sessions. The app allows a mentor to share a code block with a student, observe their coding process, and see changes in real-time.
 
 ## Deployed Version
-The app is also available online at https://codify-6ogx.onrender.com/.
+The app is also available online at https://coditor.onrender.com/.
 
 ## Key Features
 ### Lobby Page
@@ -46,6 +46,3 @@ The app is also available online at https://codify-6ogx.onrender.com/.
 - **GET /code/:id:** Retrieve a specific code block by ID.
 - **PUT /code/:id:** Update an existing code block.
 - **DELETE /code/execute:** Execute a code block.
-
-## Contributing
-Contributions are welcome! If you have any suggestions, bug reports, or feature requests, please open an issue or submit a pull request.

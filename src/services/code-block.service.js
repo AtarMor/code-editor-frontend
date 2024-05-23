@@ -1,4 +1,3 @@
-import axios from "axios"
 import { httpService } from "./http.service"
 
 export const codeBlockService = {
@@ -31,4 +30,3 @@ function runCode(userCode) {
         ]
     })
 }
-

@@ -1,5 +1,4 @@
 // LAYOUT //
-
 @mixin for-small-layout {
   @media (min-width: $break-small) {
     @content;

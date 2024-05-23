@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
-
-import { codeBlockService } from "../services/code-block.service"
 import { CodeBlockList } from "../components/CodeBlockList"
+import { codeBlockService } from "../services/code-block.service"
 
 export function Lobby() {
     const [codeBlocks, setCodeBlocks] = useState([])
@@ -13,7 +12,6 @@ export function Lobby() {
 
     async function loadCodeBlocks() {
         try {
-            setIsLoading(true)
             const codeBlocks = await codeBlockService.query()
             setCodeBlocks(codeBlocks)
         } catch (err) {
